@@ -41,7 +41,7 @@ let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{
     // Grabbing our GeoJSON data.
     d3.json(torontoData).then(function(data) {
       console.log(data, );
-      
+// Adding notes
       //L.polyline(data, {
       //  color: "blue",
       //  weight: 4
