@@ -18,14 +18,18 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
     // Create a base layer that holds both maps.
     let baseMaps = {
       "Street": streets,
-      "Satellite Streets": satelliteStreets
+      Earthquakes_past7days
+      "Satellite": satelliteStreets
+
     };
 
     // Create the map object with center, zoom level and default layer.
     let map = L.map('mapid', {
-      center: [43.7, -79.3],
-      zoom: 11,
-      layers: [satelliteStreets]
+    Earthquakes_past7days
+      center: [39.5, -98.5],
+      zoom: 3,
+      layers: [streets]
+
     });
 
     // Pass our map layers into our layer control and add the layer control to the map.
@@ -39,25 +43,30 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
     //let torontoData = "https://github.com/Ashwani-hub/Mapping_Earthquakes/blob/main/torontoRoutes.json"
     
     //Create function for line style
-    function polystyle(Feature) {
-        return {
-        fillColor: 'yellow',
-        weight: 1,
-        opacity: 1,
-        color: 'blue'
-        }
-    };
+
+    //function polystyle(Feature) {
+    //    return {
+    //    fillColor: 'yellow',
+    //    weight: 1,
+    //    opacity: 1,
+    //    color: 'blue'
+    //    }
+    //};
     
     // Accessing Toronto neighborhoods GeoJSON URL.
     let torontoHoods = "https://raw.githubusercontent.com/Ashwani-hub/Mapping_Earthquakes/main/torontoNeighborhoods.json"
-    // Grabbing our GeoJSON data.
-    d3.json(torontoHoods).then(function(data) {
-      console.log(data);
+    // Grabbing earthquake GeoJSON data.
+    d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
+    // Creating a GeoJSON layer with the retrieved data.
+    L.geoJson(data).addTo(map);
+
 // Adding notes
       //L.polyline(data, {
       //  color: "blue",
       //  weight: 4
       //}).addTo(map);
       // Creating a GeoJSON layer with the retrieved data.
-      L.geoJSON(data, {style: polystyle}).addTo(map);
+       Earthquakes_past7days
+      //L.geoJSON(data, {style: polystyle}).addTo(map);
+
     });
