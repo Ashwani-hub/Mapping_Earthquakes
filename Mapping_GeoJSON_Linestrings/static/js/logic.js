@@ -36,11 +36,24 @@ let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{
     //let airportData = "https://raw.githubusercontent.com/Ashwani-hub/Mapping_Earthquakes/main/majorAirports.json"
 
     //Accessing the Toronto airline aoutes GeoJSON URL.
-    let torontoData = ""
+    let torontoData = "https://github.com/Ashwani-hub/Mapping_Earthquakes/blob/main/torontoRoutes.json"
+    
     // Grabbing our GeoJSON data.
-    d3.json(airportData).then(function(data) {
-      console.log(data);
-      // Creating a GeoJSON layer with teh retrieved data.
-      L.geoJSON(data)
+    d3.json(torontoData).then(function(data) {
+      console.log(data, );
+// Adding notes
+      //L.polyline(data, {
+      //  color: "blue",
+      //  weight: 4
+      //}).addTo(map);
+      // Creating a GeoJSON layer with the retrieved data.
+      L.geoJSON(data, {
+        style: myStyle,eight: 2,
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup("<h3> Airline:" + feature.properties.airline + "</h3> <hr><h3> Destination: " 
+          + feature.properties.dst + "</h3>");
+        }
+      })
       //.bindPopup("<h2>Airport code: " + airportData.faa "</h2>" + "<h3>Airport Name: " + airportData.name + "</h3>")
       .addTo(map);
+    });
